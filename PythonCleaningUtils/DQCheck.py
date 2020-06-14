@@ -146,7 +146,7 @@ def rowwise_function(row,metadata_dict):
     row_dict.update({'Flag':flag})
     newrow = r.Row(**row_dict)
     return newrow
-def DataqualityCheck(df,df_metadata):
+def DataqualityCheck(spark,df,df_metadata):
     import pyspark.sql.functions as f
     from pyspark.sql.types import StructType, StringType, IntegerType, StructField
     to_prepend = [StructField("Error_Column", StringType(), True),StructField("Error_Message", StringType(), True),StructField("Flag", StringType(), True)] 
@@ -154,6 +154,6 @@ def DataqualityCheck(df,df_metadata):
     metadata_dict = create_metadata_dict(df_metadata)
     newrdd = df.rdd.map(lambda row: rowwise_function(row,metadata_dict))
     df_checked =spark.createDataFrame(newrdd,updated_schema)
-    df_checked = df_checked.select(BronzeDf.withColumn(
+    df_checked = df_checked.select(df.withColumn(
         "Error_Column",f.lit("")).withColumn("Error_Message",f.lit("")).withColumn("Flag",f.lit("")).columns)
     return df_checked,metadata_dict
