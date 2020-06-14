@@ -1,0 +1,8 @@
+README.md
+setup.py
+PythonCleaningUtils/DQCheck.py
+PythonCleaningUtils/__init__.py
+PythonCleaningUtils.egg-info/PKG-INFO
+PythonCleaningUtils.egg-info/SOURCES.txt
+PythonCleaningUtils.egg-info/dependency_links.txt
+PythonCleaningUtils.egg-info/top_level.txt
